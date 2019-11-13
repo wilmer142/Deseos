@@ -45,7 +45,6 @@ export class AgregarPage implements OnInit {
     this.lista.Completada = pendientes === 0;
     
     this.deseoService.guardarStorage();
-    console.log(this.deseoService.listas);
   }
 
   borrar(i:number){

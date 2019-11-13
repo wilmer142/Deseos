@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DeseosService } from 'src/app/services/deseos.service';
-import { Lista } from 'src/app/models/lista.model';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -11,12 +10,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab1Page {
 
-  constructor( public deseosService: DeseosService,
-                private router:Router,
-                private alertCtrl: AlertController ) {
+  constructor(public deseosService: DeseosService,
+              private router: Router,
+              private alertCtrl: AlertController) {
   }
 
-  async agregarLista(){
+  async agregarLista() {
     // this.router.navigate(['/tabs', 'tab1', 'agregar']);
 
     const alert = await this.alertCtrl.create({
@@ -31,20 +30,16 @@ export class Tab1Page {
       buttons: [
         {
           text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log("Cancelar");
-          }
+          role: 'cancel'
         },
         {
           text: 'Crear',
-          handler: ( data ) => {
-            console.log(data);
-            if (data.titulo.length === 0){
+          handler: (data) => {
+            if (data.titulo.length === 0) {
               return;
             }
 
-            let listaId:number = this.deseosService.crearLista(data.titulo);
+            let listaId: number = this.deseosService.crearLista(data.titulo);
             this.router.navigateByUrl(`/tabs/tab1/agregar/${listaId}`);
           }
         }
@@ -53,9 +48,4 @@ export class Tab1Page {
 
     alert.present();
   }
-
-  listaSeleccionada( lista:Lista ) {
-        this.router.navigateByUrl(`/tabs/tab1/agregar/${lista.id}`);
-  }
-
 }
